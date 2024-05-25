@@ -12,7 +12,7 @@ endclass.
 class zcl_rs_bo_eml implementation.
 **********************************************************************
 method if_oo_adt_classrun~main.
-    data agencies_upd type table for update /DMO/I_AgencyTP\\/DMO/Agency.
+    data agencies_upd type table for update /DMO/I_AgencyTP. "\\/DMO/Agency.
 
     agencies_upd = VALUE #( ( agencyID = '070050' name = 'R.Staudacher Travel' ) ).
     out->write( agencies_upd ).
@@ -28,6 +28,7 @@ method if_oo_adt_classrun~main.
     assign agencies_upd[ 1 ] to <ag>.
     data(info) = |Agency updated: { <ag>-AgencyID } - { <ag>-Name }|.
     out->write( info ).
+    out->write( '--------------------------------------------------' ).
 
     select * from /DMO/I_AGENCYTP
         where agencyID between '070045' and '070100'
