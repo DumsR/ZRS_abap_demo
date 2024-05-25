@@ -23,7 +23,11 @@ method if_oo_adt_classrun~main.
         update fields (  name )
         with agencies_upd.
     commit entities.
-    out->write( 'Agency 0700050 updated' ).
+
+    field-symbols <ag> like line of agencies_upd.
+    assign agencies_upd[ 1 ] to <ag>.
+    data(info) = |Agency updated: { <ag>-AgencyID } - { <ag>-Name }|.
+    out->write( info ).
 
     select * from /DMO/I_AGENCYTP
         where agencyID between '070045' and '070100'
